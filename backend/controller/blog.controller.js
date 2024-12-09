@@ -58,9 +58,9 @@ export const Update = async (req, res) => {
         res.status(404).json({success: false, message: 'Id not found'});
     }
     try{
-        await Blogs.findByIdAndUpdate(id, {title, content, tags, comment}, {new: true});
+        const updatedBlog = await Blogs.findByIdAndUpdate(id, {title, content, tags, comment}, {new: true});
 
-        res.status(200).json({success: true, message: 'Update successfully'});
+        res.status(200).json({success: true, data: updatedBlog});
     } catch(error){
         console.error('Error during Update operation:', error);
         res.status(400).json({success: false, message: 'server is Error'});
